@@ -2,11 +2,9 @@ const checkStrLength = function (text, maxLength) {
   return text.length <= maxLength;
 };
 
-checkStrLength('проверяемая строка', 20); // true
-// Длина строки ровно 18 символов
-checkStrLength('проверяемая строка', 18); // true
-// Строка длиннее 10 символов
-checkStrLength('проверяемая строка', 10); // false
+checkStrLength('проверяемая строка', 20);
+checkStrLength('проверяемая строка', 18);
+checkStrLength('проверяемая строка', 10);
 
 const isPalindrome = function (text) {
   let normalizedText = text.replaceAll(' ', '');
@@ -18,11 +16,9 @@ const isPalindrome = function (text) {
   return invertedText === normalizedText;
 };
 
-isPalindrome('топот'); // true
-// Несмотря на разный регистр, тоже палиндром
-isPalindrome('ДовОд'); // true
-// Это не палиндром
-isPalindrome('Кекс'); // false
+isPalindrome('топот');
+isPalindrome('ДовОд');
+isPalindrome('Кекс');
 
 const getNumbers = function (text) {
   text = text.toString();
@@ -36,11 +32,11 @@ const getNumbers = function (text) {
   return(parseInt(textNumber, 10));
 };
 
-getNumbers('2023 год'); // 2023
-getNumbers('ECMAScript 2022'); // 2022
-getNumbers('1 кефир, 0.5 батона'); // 105
-getNumbers('агент 007'); // 7
-getNumbers('а я томат'); // NaN
-getNumbers(2023); // 2023
-getNumbers(-1); // 1
-getNumbers(1.5); // 15
+getNumbers('2023 год');
+getNumbers('ECMAScript 2022');
+getNumbers('1 кефир, 0.5 батона');
+getNumbers('агент 007');
+getNumbers('а я томат');
+getNumbers(2023);
+getNumbers(-1);
+getNumbers(1.5);
