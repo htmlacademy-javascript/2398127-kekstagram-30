@@ -1,10 +1,20 @@
+/**
+ * Функция проверяет длину строки
+ * @param {string} text - проверяемая строка
+ * @param {number} maxLength - максимальная длина
+ * @returns {boolean} - результат проверки
+ */
 const checkStrLength = function (text, maxLength) {
   return text.length <= maxLength;
 };
 
 checkStrLength('проверяемая строка', 20);
-checkStrLength('проверяемая строка', 18);
-checkStrLength('проверяемая строка', 10);
+
+/**
+ * Функция проверяет является ли строка палиндромом
+ * @param {string} text - проверяемая строка
+ * @returns {boolean} - результат проверки
+ */
 
 const isPalindrome = function (text) {
   let normalizedText = text.replaceAll(' ', '');
@@ -17,8 +27,12 @@ const isPalindrome = function (text) {
 };
 
 isPalindrome('топот');
-isPalindrome('ДовОд');
-isPalindrome('Кекс');
+
+/**
+ * Функция извлекает цифры из строки
+ * @param {string} text - обрабатываемая строка
+ * @returns {number} - возвращает цифры в виде целого положительного числа. Если цифр нет - NaN
+ */
 
 const getNumbers = function (text) {
   text = text.toString();
@@ -33,10 +47,23 @@ const getNumbers = function (text) {
 };
 
 getNumbers('2023 год');
-getNumbers('ECMAScript 2022');
-getNumbers('1 кефир, 0.5 батона');
-getNumbers('агент 007');
-getNumbers('а я томат');
-getNumbers(2023);
-getNumbers(-1);
-getNumbers(1.5);
+
+/**
+Функция проверяет умещается ли встреча в рамки рабочего дня
+@param {string} startOfDay - начало рабочего дня в формате часы:минуты
+@param {string} endOfDay - конец рабочего дня в формате часы:минуты
+@param {string} startOfMeeting - начало встречи в формате часы:минуты
+@param {number} duration - продолжительность встречи в минутах
+@returns {boolean} - возвращает true, если встреча не выходит за рамки рабочего дня, и false, если выходит
+*/
+
+const isEnoughTimeForMeeting = function (startOfDay,endOfDay, startOfMeeting, duration) {
+  const convertTime = function (time) {
+    const times = time.split(':');
+    return parseInt(times[0], 10) * 60 + parseInt(times[1], 10);
+  };
+  return (convertTime(startOfMeeting) >= convertTime(startOfDay)) && (convertTime(startOfMeeting) <= (convertTime(endOfDay) - duration));
+};
+
+isEnoughTimeForMeeting('08:00', '17:30', '14:00', 90);
+
