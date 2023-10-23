@@ -1,3 +1,1 @@
-import {picturesData} from './data.js';
-
-console.log(picturesData);
+import './data.js';
