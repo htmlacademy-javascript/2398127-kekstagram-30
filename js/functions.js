@@ -65,5 +65,5 @@ const isEnoughTimeForMeeting = function (startOfDay,endOfDay, startOfMeeting, du
   return (convertTime(startOfMeeting) >= convertTime(startOfDay)) && (convertTime(startOfMeeting) <= (convertTime(endOfDay) - duration));
 };
 
-isEnoughTimeForMeeting('08:00', '17:30', '14:00', 90);
+isEnoughTimeForMeeting('08:00', '17:30', '14:00', 80);
 
