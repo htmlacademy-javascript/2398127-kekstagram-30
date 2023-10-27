@@ -47,27 +47,28 @@ const NAMES = [
 ];
 
 const PICTURES_COUNT = 25;
-const randomId = createUnicueIds(1, 25);
-const randomUrl = createUnicueIds(1, 25);
-const randomCommentId = createUnicueIds(1, 1000);
+const randomizeId = createUnicueIds(1, 25);
+const randomizeUrl = createUnicueIds(1, 25);
+const randomizeCommentId = createUnicueIds(1, 1000);
 
-const createCommentsData = () => ({
-  id: randomCommentId(),
+const createCommentData = () => ({
+  id: randomizeCommentId(),
   avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 
 const createPictureData = () => {
-  const pictureUrl = randomUrl();
+  const pictureUrl = randomizeUrl();
   return {
-    id: randomId(),
+    id: randomizeId(),
     url: `photos/${pictureUrl}.jpg`,
     description: DESCRIPTIONS[pictureUrl - 1],
     likes: getRandomInt(15, 200),
-    comments: Array.from({length: getRandomInt(0, 30)}, createCommentsData)
+    comments: Array.from({length: getRandomInt(0, 30)}, createCommentData)
   };
 };
 
-const picturesData = Array.from({length: PICTURES_COUNT}, createPictureData);
-export {picturesData};
+const createPicturesData = () => Array.from({length: PICTURES_COUNT}, createPictureData);
+
+export {createPicturesData};
