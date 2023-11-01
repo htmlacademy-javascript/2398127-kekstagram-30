@@ -51,6 +51,7 @@ function closeBigPicture () {
   bigPictureElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown',onDocumentKeydown);
+  commentsContainer.innerHTML = '';
 }
 
 /**
