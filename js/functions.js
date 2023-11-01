@@ -61,7 +61,7 @@ const isEnoughTimeForMeeting = (startOfDay,endOfDay, startOfMeeting, duration) =
     return parseInt(times[0], 10) * 60 + parseInt(times[1], 10);
   };
   const meetingStartsDuringWork = convertTime(startOfMeeting) >= convertTime(startOfDay);
-  const meetingEndsDuringWork = convertTime(startOfMeeting) + duration <= convertTime(endOfDay)
+  const meetingEndsDuringWork = convertTime(startOfMeeting) + duration <= convertTime(endOfDay);
   return meetingStartsDuringWork && meetingEndsDuringWork;
 };
 
