@@ -6,16 +6,16 @@ const getRandomInt = (min, max) => {
 };
 
 const createUnicueIds = (min, max) => {
-  const previousId = [];
+  const previousIds = [];
   return function () {
     let currentId = getRandomInt(min, max);
-    if (previousId.length >= (max - min + 1)) {
+    if (previousIds.length >= (max - min + 1)) {
       return null;
     }
-    while (previousId.includes(currentId)) {
+    while (previousIds.includes(currentId)) {
       currentId = getRandomInt(min, max);
     }
-    previousId.push(currentId);
+    previousIds.push(currentId);
     return currentId;
   };
 };

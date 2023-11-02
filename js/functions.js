@@ -4,9 +4,7 @@
  * @param {number} maxLength - максимальная длина
  * @returns {boolean} - результат проверки
  */
-const checkStrLength = function (text, maxLength) {
-  return text.length <= maxLength;
-};
+const checkStrLength = (text, maxLength) => text.length <= maxLength;
 
 checkStrLength('проверяемая строка', 20);
 
@@ -16,7 +14,7 @@ checkStrLength('проверяемая строка', 20);
  * @returns {boolean} - результат проверки
  */
 
-const isPalindrome = function (text) {
+const isPalindrome = (text) => {
   let normalizedText = text.replaceAll(' ', '');
   normalizedText = normalizedText.toLowerCase();
   let invertedText = '';
@@ -34,7 +32,7 @@ isPalindrome('топот');
  * @returns {number} - возвращает цифры в виде целого положительного числа. Если цифр нет - NaN
  */
 
-const getNumbers = function (text) {
+const getNumbers = (text) => {
   text = text.toString();
   let textNumber = '';
   for (let i = 0; i <= text.length; i++) {
@@ -50,20 +48,21 @@ getNumbers('2023 год');
 
 /**
 Функция проверяет умещается ли встреча в рамки рабочего дня
-@param {string} startOfDay - начало рабочего дня в формате часы:минуты
-@param {string} endOfDay - конец рабочего дня в формате часы:минуты
-@param {string} startOfMeeting - начало встречи в формате часы:минуты
-@param {number} duration - продолжительность встречи в минутах
-@returns {boolean} - возвращает true, если встреча не выходит за рамки рабочего дня, и false, если выходит
+* @param {string} startOfDay - начало рабочего дня в формате часы:минуты
+* @param {string} endOfDay - конец рабочего дня в формате часы:минуты
+* @param {string} startOfMeeting - начало встречи в формате часы:минуты
+* @param {number} duration - продолжительность встречи в минутах
+* @returns {boolean} - возвращает true, если встреча не выходит за рамки рабочего дня, и false, если выходит
 */
 
-const isEnoughTimeForMeeting = function (startOfDay,endOfDay, startOfMeeting, duration) {
+const isEnoughTimeForMeeting = (startOfDay,endOfDay, startOfMeeting, duration) => {
   const convertTime = function (time) {
     const times = time.split(':');
     return parseInt(times[0], 10) * 60 + parseInt(times[1], 10);
   };
-  return (convertTime(startOfMeeting) >= convertTime(startOfDay)) && (convertTime(startOfMeeting) <= (convertTime(endOfDay) - duration));
+  const meetingStartsDuringWork = convertTime(startOfMeeting) >= convertTime(startOfDay);
+  const meetingEndsDuringWork = convertTime(startOfMeeting) + duration <= convertTime(endOfDay);
+  return meetingStartsDuringWork && meetingEndsDuringWork;
 };
 
 isEnoughTimeForMeeting('08:00', '17:30', '14:00', 80);
-
