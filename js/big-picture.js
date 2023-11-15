@@ -72,7 +72,7 @@ const openBigPicture = () => {
 
 /**
  * Функция берет данные из массива объектов с данными изображений и выводит их в окне большого изображения.
- * @param {array} picture - массив с данными изображений.
+ * @param {array} picture - массив с данными изображений
  */
 
 const showBigPictureInfo = (picture) => {
