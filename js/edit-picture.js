@@ -141,7 +141,7 @@ const addEffectOptions = () => {
 };
 
 addEffectOptions();
-
+initScaleButton();
 
 // noUiSlider.create(effectLevelSlider, {
 //   range: {
