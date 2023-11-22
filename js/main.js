@@ -1,10 +1,9 @@
-import {createPicturesData} from './data.js';
 import {createThumbnails} from './thumbnails.js';
 import {initValidation} from './user-form.js';
 import {initEffectOptions, initScale} from './edit-picture.js';
+import {getData} from './api.js';
 
-const picturesData = createPicturesData();
-createThumbnails(picturesData);
+getData(createThumbnails);
 initValidation();
 initScale();
 initEffectOptions();

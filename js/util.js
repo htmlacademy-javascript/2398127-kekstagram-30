@@ -1,3 +1,7 @@
+const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
+const successUploadTemplate = document.querySelector('#success').content.querySelector('.success');
+const failedUploadTemplate = document.querySelector('#error').content.querySelector('.error');
+
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -24,5 +28,46 @@ const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.le
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomInt, createUnicueIds, getRandomArrayElement, isEscapeKey};
+const showDataError = () => {
+  const dataError = dataErrorTemplate.cloneNode(true);
+  document.body.appendChild(dataError);
+  setTimeout(() => {
+    dataError.remove();
+  }, 3000);
 
+};
+const showSuccessUpload = () => {
+  const successUpload = successUploadTemplate.cloneNode(true);
+  document.body.appendChild(successUpload);
+  const successUploadCloseButton = successUpload.querySelector('.success__button');
+  successUploadCloseButton.addEventListener('click', () => {
+    successUpload.remove();
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      successUpload.remove();
+    }
+  });
+  document.addEventListener('click', () => {
+    successUpload.remove();
+  });
+};
+
+const showFailedUpload = () => {
+  const failedUpload = failedUploadTemplate.cloneNode(true);
+  document.body.appendChild(failedUpload);
+  const failedUploadCloseButton = failedUpload.querySelector('.error__button');
+  failedUploadCloseButton.addEventListener('click', () => {
+    failedUpload.remove();
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      failedUpload.remove();
+    }
+  });
+  document.addEventListener('click', () => {
+    failedUpload.remove();
+  });
+};
+
+export {getRandomInt, createUnicueIds, getRandomArrayElement, isEscapeKey, showDataError, showSuccessUpload, showFailedUpload};
