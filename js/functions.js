@@ -13,7 +13,6 @@ checkStrLength('проверяемая строка', 20);
  * @param {string} text - проверяемая строка
  * @returns {boolean} - результат проверки
  */
-
 const isPalindrome = (text) => {
   let normalizedText = text.replaceAll(' ', '');
   normalizedText = normalizedText.toLowerCase();
@@ -31,7 +30,6 @@ isPalindrome('топот');
  * @param {string} text - обрабатываемая строка
  * @returns {number} - возвращает цифры в виде целого положительного числа. Если цифр нет - NaN
  */
-
 const getNumbers = (text) => {
   text = text.toString();
   let textNumber = '';
@@ -54,7 +52,6 @@ getNumbers('2023 год');
 * @param {number} duration - продолжительность встречи в минутах
 * @returns {boolean} - возвращает true, если встреча не выходит за рамки рабочего дня, и false, если выходит
 */
-
 const isEnoughTimeForMeeting = (startOfDay,endOfDay, startOfMeeting, duration) => {
   const convertTime = function (time) {
     const times = time.split(':');

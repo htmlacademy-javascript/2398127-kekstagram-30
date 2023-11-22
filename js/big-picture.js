@@ -9,7 +9,6 @@ const commentLoader = bigPictureElement.querySelector('.comments-loader');
  * Функция берет данные из массива, содержащего объекты с данными комментариев и выводит комментарии в окне с большим изображением.
  * @param {array} commentsData - массив с объектами комментариев к изображениям.
  */
-
 const showBigPictureComments = (commentsData) => {
   commentsData.forEach((commentData) => {
     const comment = document.createElement('li');
@@ -35,7 +34,6 @@ const showBigPictureComments = (commentsData) => {
 /**
  * Если нажат Escape, то вызывается функция, закрывающая большое изображение.
  */
-
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -46,7 +44,6 @@ const onDocumentKeydown = (evt) => {
 /**
  * Функция закрывает большое изображение и удаляет обработчик событий клавиши Esc.
  */
-
 function closeBigPicture () {
   bigPictureElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -57,7 +54,6 @@ function closeBigPicture () {
 /**
  * Функция отображает большое изображение и добавляет обработчик событий на Esc и клик по кнопке закрытия.
  */
-
 const openBigPicture = () => {
   bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -74,7 +70,6 @@ const openBigPicture = () => {
  * Функция берет данные из массива объектов с данными изображений и выводит их в окне большого изображения.
  * @param {array} picture - массив с данными изображений
  */
-
 const showBigPictureInfo = (picture) => {
   bigPictureElement.querySelector('.big-picture__img > img').src = picture.url;
   bigPictureElement.querySelector('.big-picture__img').alt = picture.description;
