@@ -1,4 +1,4 @@
-import { showDataError, showSuccessUpload, showFailedUpload} from './util';
+import { showDataError, showSuccessUpload, showFailedUpload} from './util.js';
 
 const ErrorText = {
   GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
