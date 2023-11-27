@@ -1,3 +1,4 @@
+const ERROR_TIME_ON_SCREEN = 3000;
 const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const successUploadTemplate = document.querySelector('#success').content.querySelector('.success');
 const failedUploadTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -33,7 +34,7 @@ const showDataError = () => {
   document.body.appendChild(dataError);
   setTimeout(() => {
     dataError.remove();
-  }, 3000);
+  }, ERROR_TIME_ON_SCREEN);
 
 };
 const showSuccessUpload = () => {
