@@ -1,7 +1,7 @@
 import { createThumbnails } from './thumbnails.js';
-import { getRandomArrayElement } from './util.js';
+import { debounce, getRandomArrayElement } from './util.js';
 const RANDOM_PICTURES_COUNT = 10;
-
+const FILTER_DELAY = 500;
 const picturesFilterContainer = document.querySelector('.img-filters');
 const picturesContainer = document.querySelector('.pictures');
 const picturesUploadForm = document.querySelector('.img-upload');
@@ -29,23 +29,27 @@ const clearPictures = () => {
   picturesContainer.append(picturesUploadForm);
 };
 
+const onFilterChange = (evt, picturesData) => {
+  filterButtons.forEach((element) => element.classList.remove('img-filters__button--active'));
+  evt.target.classList.add('img-filters__button--active');
+  clearPictures();
+  if (evt.target.id === 'filter-default') {
+    createThumbnails(picturesData);
+  }
+  if (evt.target.id === 'filter-random') {
+    createThumbnails(getRandomPictures(picturesData));
+  }
+  if (evt.target.id === 'filter-discussed') {
+    createThumbnails(sortPicturesByCommentsCount(picturesData));
+  }
+};
+
 const initPicturesFilters = (picturesData) => {
   picturesFilterContainer.classList.remove('img-filters--inactive');
   createThumbnails(picturesData);
 
   pictureFilterForm.addEventListener('click', (evt) => {
-    filterButtons.forEach((element) => element.classList.remove('img-filters__button--active'));
-    evt.target.classList.add('img-filters__button--active');
-    clearPictures();
-    if (evt.target.id === 'filter-default') {
-      createThumbnails(picturesData);
-    }
-    if (evt.target.id === 'filter-random') {
-      createThumbnails(getRandomPictures(picturesData));
-    }
-    if (evt.target.id === 'filter-discussed') {
-      createThumbnails(sortPicturesByCommentsCount(picturesData));
-    }
+    debounce(onFilterChange(evt, picturesData), FILTER_DELAY);
   });
 };
 
