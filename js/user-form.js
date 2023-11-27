@@ -1,4 +1,5 @@
-import { removeEffects, resetScale} from './edit-picture';
+import { removeEffects, resetScale} from './edit-picture.js';
+import { postData } from './api.js';
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_COUNT = 5;
 const MAX_DESCRIPTION_LENGTH = 140;
@@ -6,6 +7,7 @@ const MAX_DESCRIPTION_LENGTH = 140;
 const pictureUploadInput = document.querySelector('.img-upload__input');
 const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload__form');
+const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__submit');
 const closeOverlayButton = document.querySelector('.img-upload__cancel');
 const hashtagInput = pictureUploadForm.querySelector('.text__hashtags');
 const commentInput = pictureUploadForm.querySelector('.text__description');
@@ -107,5 +109,23 @@ const initValidation = () => {
     pristine.validate();
   });
 };
+
+const enableFormButton = () => {
+  pictureUploadButton.disabled = false;
+};
+
+const disableFormButton = () => {
+  pictureUploadButton.disabled = true;
+};
+
+pictureUploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
+  if (isValid) {
+    disableFormButton();
+    const formData = new FormData(evt.target);
+    postData(enableFormButton, formData, closePictureUploadForm);
+  }
+});
 
 export {initValidation};

@@ -171,6 +171,7 @@ const removeEffects = () => {
   currentEffect = Object.keys(effectInfo)[5];
   updateEffectSlider(effectInfo[currentEffect]);
   imgPreview.style.filter = null;
+  sliderContainer.classList.add('hidden');
 };
 
 export {initEffectOptions, removeEffects, resetScale, initScale};

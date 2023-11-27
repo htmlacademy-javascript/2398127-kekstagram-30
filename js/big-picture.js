@@ -1,4 +1,5 @@
 import {isEscapeKey} from './util.js';
+const COMMENTS_SHOWED_ON_CLICK = 5;
 const bigPictureElement = document.querySelector('.big-picture');
 const bigPictureCloseElement = bigPictureElement.querySelector('.big-picture__cancel');
 const commentsContainer = bigPictureElement.querySelector('.social__comments');
@@ -9,11 +10,10 @@ const commentsCount = bigPictureElement.querySelector('.social__comment-shown-co
  * @param {array} commentsData - массив с объектами комментариев к изображениям.
  */
 const showBigPictureComments = (commentsData) => {
-  //commentsData.forEach((commentData) => {
   for (let i = 0; i < commentsData.length; i++) {
     const comment = document.createElement('li');
     comment.classList.add('social__comment');
-    if (i >= 5) {
+    if (i >= COMMENTS_SHOWED_ON_CLICK) {
       comment.classList.add('hidden');
     }
     const commentAvatar = document.createElement('img');
@@ -31,22 +31,22 @@ const showBigPictureComments = (commentsData) => {
 
     commentsContainer.appendChild(comment);
   }
-  if (commentsData.length < 5) {
+  if (commentsData.length < COMMENTS_SHOWED_ON_CLICK) {
     commentsCount.textContent = commentsData.length;
     commentsLoader.classList.add('hidden');
   } else {
-    commentsCount.textContent = 5;
+    commentsCount.textContent = COMMENTS_SHOWED_ON_CLICK;
     commentsLoader.classList.remove('hidden');
   }
 };
 
 const showMoreComments = () => {
   const hiddenComments = commentsContainer.querySelectorAll('.hidden');
-  if (hiddenComments.length > 5) {
-    for (let i = 0; i < 5; i++) {
+  if (hiddenComments.length > COMMENTS_SHOWED_ON_CLICK) {
+    for (let i = 0; i < COMMENTS_SHOWED_ON_CLICK; i++) {
       hiddenComments[i].classList.remove('hidden');
     }
-    commentsCount.textContent = parseInt(commentsCount.textContent, 10) + 5;
+    commentsCount.textContent = parseInt(commentsCount.textContent, 10) + COMMENTS_SHOWED_ON_CLICK;
   } else {
     for (let i = 0; i < hiddenComments.length; i++) {
       hiddenComments[i].classList.remove('hidden');
