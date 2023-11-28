@@ -3,10 +3,12 @@ import { postData } from './api.js';
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_COUNT = 5;
 const MAX_DESCRIPTION_LENGTH = 140;
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const pictureUploadInput = document.querySelector('.img-upload__input');
 const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload__form');
+const picturePreview = document.querySelector('.img-upload__preview img');
 const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__submit');
 const closeOverlayButton = document.querySelector('.img-upload__cancel');
 const hashtagInput = pictureUploadForm.querySelector('.text__hashtags');
@@ -53,7 +55,15 @@ function closePictureUploadForm () {
   resetScale();
 }
 
-pictureUploadInput.addEventListener('change', openPictureUploadForm);
+pictureUploadInput.addEventListener('change', () => {
+  const file = pictureUploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    picturePreview.src = URL.createObjectURL(file);
+  }
+  openPictureUploadForm();
+});
 
 const normalizeHashtags = (hashtagString) => hashtagString.trim().split(' ').filter((hashtag) => Boolean(hashtag.length));
 const validateHashtagSymbols = (value) => normalizeHashtags(value).every((hashtag) => VALID_SYMBOLS.test(hashtag));
