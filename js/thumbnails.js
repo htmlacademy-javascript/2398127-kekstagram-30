@@ -3,7 +3,6 @@ const picturesContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesListFragment = document.createDocumentFragment();
 
-
 /**
  * Функция создает миниатюры изображений с количеством лайков и комментариев.
  * @param {Object} picturesData - объект с данными загруженных фотографий

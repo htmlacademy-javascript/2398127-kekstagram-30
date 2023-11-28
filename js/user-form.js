@@ -1,5 +1,5 @@
 import { removeEffects, resetScale} from './edit-picture.js';
-import { postData } from './api.js';
+import { sendData } from './api.js';
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_COUNT = 5;
 const MAX_DESCRIPTION_LENGTH = 140;
@@ -13,6 +13,7 @@ const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__submit
 const closeOverlayButton = document.querySelector('.img-upload__cancel');
 const hashtagInput = pictureUploadForm.querySelector('.text__hashtags');
 const commentInput = pictureUploadForm.querySelector('.text__description');
+const effectsPreview = document.querySelectorAll('.effects__preview');
 const pristine = new Pristine(pictureUploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -25,7 +26,7 @@ const isTextFieldFocused = () => document.activeElement === hashtagInput || docu
  * Функция обработчика событий, закрывающая окно загрузки изображения нажатием Esc, когда текстовое поле не в фокусе.
  */
 const onDocumentKeydown = (evt) => {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  if (evt.key === 'Escape' && !isTextFieldFocused() && document.querySelector('.error') === null) {
     evt.preventDefault();
     closePictureUploadForm();
   }
@@ -61,6 +62,9 @@ pictureUploadInput.addEventListener('change', () => {
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (matches) {
     picturePreview.src = URL.createObjectURL(file);
+    effectsPreview.forEach((effectPreview) => {
+      effectPreview.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
   }
   openPictureUploadForm();
 });
@@ -133,8 +137,7 @@ pictureUploadForm.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   if (isValid) {
     disableFormButton();
-    const formData = new FormData(evt.target);
-    postData(enableFormButton, formData, closePictureUploadForm);
+    sendData(new FormData(evt.target), enableFormButton, closePictureUploadForm);
   }
 });
 
