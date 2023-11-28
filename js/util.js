@@ -71,4 +71,11 @@ const showFailedUpload = () => {
   });
 };
 
-export {getRandomInt, createUnicueIds, getRandomArrayElement, isEscapeKey, showDataError, showSuccessUpload, showFailedUpload};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+export {debounce, getRandomInt, createUnicueIds, getRandomArrayElement, isEscapeKey, showDataError, showSuccessUpload, showFailedUpload};

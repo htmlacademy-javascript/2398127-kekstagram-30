@@ -1,10 +1,5 @@
 import { showDataError, showSuccessUpload, showFailedUpload} from './util.js';
 
-const ErrorText = {
-  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
-  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
-};
-
 const getData = (method) => {
   fetch('https://30.javascript.pages.academy/kekstagram/data')
     .then((response) => {
@@ -18,7 +13,6 @@ const getData = (method) => {
     })
     .catch(() => {
       showDataError();
-      throw new Error(ErrorText.GET_DATA);
     });
 };
 
