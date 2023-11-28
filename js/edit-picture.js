@@ -100,7 +100,7 @@ let currentEffect = Object.keys(effectInfo)[5];
  * Функция записывает значение интенсивности эффекта со слайдера в скрытое поле и накладывает эффект на изображение.
  */
 const updateEffectOnPicture = () => {
-  const currentEffectLevel = effectLevelSlider.noUiSlider.get();
+  const currentEffectLevel = parseFloat(effectLevelSlider.noUiSlider.get());
   effectLevel.value = currentEffectLevel;
   if (effectInfo[currentEffect].unit) {
     imgPreview.style.filter = `${effectInfo[currentEffect].effect}(${currentEffectLevel}${effectInfo[currentEffect].unit})`;

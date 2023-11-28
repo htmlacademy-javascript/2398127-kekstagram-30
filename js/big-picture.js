@@ -5,11 +5,13 @@ const bigPictureCloseElement = bigPictureElement.querySelector('.big-picture__ca
 const commentsContainer = bigPictureElement.querySelector('.social__comments');
 const commentsLoader = bigPictureElement.querySelector('.comments-loader');
 const commentsCount = bigPictureElement.querySelector('.social__comment-shown-count');
+
 /**
  * Функция берет данные из массива, содержащего объекты с данными комментариев и выводит комментарии в окне с большим изображением.
- * @param {array} commentsData - массив с объектами комментариев к изображениям.
+ * @param {Array} commentsData - массив с объектами комментариев к изображениям.
  */
 const showBigPictureComments = (commentsData) => {
+  commentsContainer.innerHTML = '';
   for (let i = 0; i < commentsData.length; i++) {
     const comment = document.createElement('li');
     comment.classList.add('social__comment');
@@ -40,6 +42,9 @@ const showBigPictureComments = (commentsData) => {
   }
 };
 
+/**
+ * Функция отображает до 5 комментариев.
+ */
 const showMoreComments = () => {
   const hiddenComments = commentsContainer.querySelectorAll('.hidden');
   if (hiddenComments.length > COMMENTS_SHOWED_ON_CLICK) {

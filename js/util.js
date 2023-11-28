@@ -1,4 +1,4 @@
-const ERROR_TIME_ON_SCREEN = 3000;
+const ERROR_TIME_ON_SCREEN = 5000;
 const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const successUploadTemplate = document.querySelector('#success').content.querySelector('.success');
 const failedUploadTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -37,6 +37,7 @@ const showDataError = () => {
   }, ERROR_TIME_ON_SCREEN);
 
 };
+
 const showSuccessUpload = () => {
   const successUpload = successUploadTemplate.cloneNode(true);
   document.body.appendChild(successUpload);
@@ -49,8 +50,10 @@ const showSuccessUpload = () => {
       successUpload.remove();
     }
   });
-  document.addEventListener('click', () => {
-    successUpload.remove();
+  document.addEventListener('click', (evt) => {
+    if (evt.target.closest('.success__inner') === null){
+      successUpload.remove();
+    }
   });
 };
 
@@ -62,16 +65,19 @@ const showFailedUpload = () => {
     failedUpload.remove();
   });
   document.addEventListener('keydown', (evt) => {
+    evt.stopPropagation();
     if (evt.key === 'Escape') {
       failedUpload.remove();
     }
   });
-  document.addEventListener('click', () => {
-    failedUpload.remove();
+  document.addEventListener('click', (evt) => {
+    if (evt.target.closest('.error__inner') === null){
+      failedUpload.remove();
+    }
   });
 };
 
-const debounce = (callback, timeoutDelay) => {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
