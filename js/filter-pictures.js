@@ -28,10 +28,7 @@ const getRandomPictures = (data) => {
  * @param {Array} data - массив с данными фотографий
  * @returns копия массива, отсортированная по уменьшению количества комментариев
  */
-const sortPicturesByCommentsCount = (data) => {
-  const picturesByCommentsCount = data.slice().sort((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length);
-  return picturesByCommentsCount;
-};
+const sortPicturesByCommentsCount = (data) => data.slice().sort((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length);
 
 /**
  * Функция очищает контейнер фотографий
