@@ -60,6 +60,7 @@ const showMoreComments = () => {
     commentsLoader.classList.add('hidden');
   }
 };
+
 /**
  * Если нажат Escape, то вызывается функция, закрывающая большое изображение.
  */
